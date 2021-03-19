@@ -37,3 +37,9 @@
   width: 100%;
   cursor: pointer;
 }
+
+.hotels {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

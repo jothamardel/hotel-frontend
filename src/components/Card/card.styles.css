@@ -1,0 +1,39 @@
+.card_container {
+  border: 1px solid white;
+  width: 200px;
+  margin: 10px;
+  /* text-align: center; */
+}
+
+.card_initial {
+  text-align: center;
+  background-color: #7f7f7f7f;
+}
+
+.card_initial h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.card_details p {
+  font-size: 0.7rem;
+  margin: 2px;
+}
+
+.card_button {
+  width: 100%;
+}
+
+.card_button button {
+  width: 100%;
+  cursor: pointer;
+  background: white;
+  text-align: center;
+  border: none;
+  border: 1px solid white;
+}
+
+.card_button button a {
+  text-decoration: none;
+  color: black;
+}

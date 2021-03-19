@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Card from '../../components/Card/card.component';
 import './search.styles.css';
 
 
@@ -12,7 +12,8 @@ class Search extends React.Component {
       city: "",
       arrival_date: '',
       departure_date: '',
-      number_of_rooms: 0
+      number_of_rooms: 0,
+      available_hotel: []
     }
   }
 
@@ -37,7 +38,7 @@ class Search extends React.Component {
       })
     })
       .then(res => res.json())
-      .then(console.log)
+      .then(hotels => this.setState({ available_hotel: hotels }))
       .catch(console.log)
   }
 
@@ -45,9 +46,6 @@ class Search extends React.Component {
 
 
   render() {
-    console.log(this.state);
-    console.log(this.state.arrival_date.split('-').reduce((total, value) => total + value), "");
-    console.log(this.state.departure_date.split('-').reduce((total, value) => total + value), "");
     return (
       <div >
         <form onSubmit={this.onFormSubmit} className="container">
@@ -90,6 +88,13 @@ class Search extends React.Component {
             <button type="submit">Search</button>
           </div>
         </form>
+
+        <div className="hotels">
+          {
+            !this.state.available_hotel.length ? null :
+              this.state.available_hotel.map(hotel => <Card key={hotel._id} {...hotel} />)
+          }
+        </div>
 
       </div>
     );

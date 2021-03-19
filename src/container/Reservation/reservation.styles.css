@@ -1,0 +1,27 @@
+.reserve_container {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.reserve_container form {
+  width: 100%;
+}
+
+
+
+.reserve {
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.reserve input {
+  width: 50%;
+}
+
+.reserve_container form button {
+  width: 52%;
+  cursor: pointer;
+  height: 30px;
+}
