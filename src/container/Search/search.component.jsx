@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { loadAllHotels, userDetails } from '../../redux/Hotels/hotels.actions';
 import Card from '../../components/Card/card.component';
 import './search.styles.css';
 
@@ -12,8 +14,7 @@ class Search extends React.Component {
       city: "",
       arrival_date: '',
       departure_date: '',
-      number_of_rooms: 0,
-      available_hotel: []
+      number_of_rooms: 0
     }
   }
 
@@ -24,8 +25,9 @@ class Search extends React.Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    const { arrival_date } = this.state;
-    if (!arrival_date) return;
+    const { arrival_date, departure_date, number_of_rooms } = this.state;
+    if (!arrival_date || !departure_date || !number_of_rooms) return;
+    this.props.userDetails(this.state);
     fetch(`${process.env.REACT_APP_URL}search-hotel`, {
       method: "POST",
       headers: {
@@ -38,7 +40,7 @@ class Search extends React.Component {
       })
     })
       .then(res => res.json())
-      .then(hotels => this.setState({ available_hotel: hotels }))
+      .then(hotels => this.props.loadAllHotels(hotels))
       .catch(console.log)
   }
 
@@ -88,11 +90,10 @@ class Search extends React.Component {
             <button type="submit">Search</button>
           </div>
         </form>
-
         <div className="hotels">
           {
-            !this.state.available_hotel.length ? null :
-              this.state.available_hotel.map(hotel => <Card key={hotel._id} {...hotel} />)
+            !this.props.hotels.available_hotels.length ? null :
+              this.props.hotels.available_hotels.map(hotel => <Card key={hotel._id} {...hotel} />)
           }
         </div>
 
@@ -101,4 +102,13 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
+const mapStateToProps = state => ({
+  hotels: state.hotels
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadAllHotels: (hotels) => dispatch(loadAllHotels(hotels)),
+  userDetails: (data) => dispatch(userDetails(data))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
