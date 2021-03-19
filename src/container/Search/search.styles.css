@@ -1,0 +1,39 @@
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.search_container {
+  display: flex;
+  justify-content: center;
+}
+
+
+.search_container div {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  font-size: 0.8rem;
+}
+
+
+
+
+.search_container div input, select {
+  margin-top: 5px;
+}
+
+
+
+.search_button {
+  width: 47%;
+}
+
+.search_button button {
+  width: 100%;
+  cursor: pointer;
+}
