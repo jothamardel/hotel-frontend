@@ -40,7 +40,10 @@ class Search extends React.Component {
       })
     })
       .then(res => res.json())
-      .then(hotels => this.props.loadAllHotels(hotels))
+      .then(hotels => {
+        console.log(hotels)
+        // this.props.loadAllHotels(hotels)
+      })
       .catch(console.log)
   }
 
@@ -92,7 +95,9 @@ class Search extends React.Component {
         </form>
         <div className="hotels">
           {
-            !this.props.hotels.available_hotels.length ? null :
+            !this.props.hotels.available_hotels.length
+              // (this.props.hotels.available_hotels)
+              ? null :
               this.props.hotels.available_hotels.map(hotel => <Card key={hotel._id} {...hotel} />)
           }
         </div>
