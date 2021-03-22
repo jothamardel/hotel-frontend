@@ -12,6 +12,10 @@ export const userDetails = (data) => ({
   payload: data
 });
 
+export const hideMessage = () => ({
+  type: ConstantTypes.HIDE_MESSAGE
+})
+
 export const makeReservation = details => dispatch => {
   dispatch({
     type: ConstantTypes.RESERVE_HOTEL_START

@@ -1,7 +1,10 @@
 import ConstantTypes from './hotels.constants';
 
 const INITIAL_STATE = {
-  available_hotels: [],
+  available_hotels: {
+    hotels: [],
+    message: ""
+  },
   user: null,
   pending: false,
   message: '',
@@ -31,6 +34,15 @@ const hotelReducer = (state = INITIAL_STATE, action = {}) => {
         pending: false,
         message: '',
         error: action.payload
+      }
+    case ConstantTypes.HIDE_MESSAGE:
+      return {
+        ...state,
+        available_hotels: {
+          ...state.available_hotels,
+          message: ""
+        },
+        message: ""
       }
     case ConstantTypes.LOAD_HOTELS:
       return {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { makeReservation } from '../../redux/Hotels/hotels.actions';
+import { makeReservation, hideMessage } from '../../redux/Hotels/hotels.actions';
 import './reservation.styles.css';
 
 
@@ -10,6 +10,10 @@ class Reservation extends React.Component {
     last_name: '',
     phone: '',
     email: ''
+  }
+
+  componentDidMount() {
+    this.props.hideMessage();
   }
 
   onInputChange = (event) => {
@@ -34,13 +38,12 @@ class Reservation extends React.Component {
   render() {
 
     let viewHotel = {}
+    // console.log(this.props.match.url.split('/')[2]);
+    this.props.hotels.available_hotels.hotels.map(item => item._id === this.props.match.url.split('/')[2] ? viewHotel = { ...item } : null)
 
-    console.log(this.props.match.url.split('/')[2]);
-
-    this.props.hotels.map(item => item._id === this.props.match.url.split('/')[2] ? viewHotel = { ...item } : null)
-    console.log(viewHotel)
     return (
       <div className="reserve_container">
+        <p>{this.props.hotels.message}</p>
         <form onSubmit={this.onFormSubmit}>
           <div className="reserve">
             <label htmlFor="first_name"></label>
@@ -125,12 +128,13 @@ class Reservation extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  hotels: state.hotels.available_hotels,
+  hotels: state.hotels,
   user: state.hotels.user
 });
 
 const mapDispatchToProps = dispatch => ({
-  makeReservation: (details) => dispatch(makeReservation(details))
+  makeReservation: (details) => dispatch(makeReservation(details)),
+  hideMessage: () => dispatch(hideMessage())
 });
 
 

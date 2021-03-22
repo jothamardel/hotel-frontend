@@ -14,7 +14,8 @@ class Search extends React.Component {
       city: "",
       arrival_date: '',
       departure_date: '',
-      number_of_rooms: 0
+      number_of_rooms: 0,
+      price: 0
     }
   }
 
@@ -40,9 +41,8 @@ class Search extends React.Component {
       })
     })
       .then(res => res.json())
-      .then(hotels => {
-        console.log(hotels)
-        // this.props.loadAllHotels(hotels)
+      .then((hotels) => {
+        this.props.loadAllHotels({ ...hotels });
       })
       .catch(console.log)
   }
@@ -51,8 +51,10 @@ class Search extends React.Component {
 
 
   render() {
+    console.log(this.props.hotels.available_hotels.message)
     return (
-      <div >
+      <div style={{ textAlign: 'center' }}>
+        <p>{this.props.hotels.available_hotels.message}</p>
         <form onSubmit={this.onFormSubmit} className="container">
           <div className="search_container">
 
@@ -87,6 +89,11 @@ class Search extends React.Component {
               <label htmlFor="number_of_rooms">Number of room(s)</label>
               <input type='number' name="number_of_rooms" onChange={this.onInputChange} />
             </div>
+
+            <div>
+              <label htmlFor="price">Max price</label>
+              <input type='number' name="price" onChange={this.onInputChange} />
+            </div>
           </div>
 
           <div className="search_button">
@@ -95,10 +102,10 @@ class Search extends React.Component {
         </form>
         <div className="hotels">
           {
-            !this.props.hotels.available_hotels.length
+            !this.props.hotels.available_hotels.hotels.length
               // (this.props.hotels.available_hotels)
               ? null :
-              this.props.hotels.available_hotels.map(hotel => <Card key={hotel._id} {...hotel} />)
+              this.props.hotels.available_hotels.hotels.map(hotel => <Card key={hotel._id} {...hotel} />)
           }
         </div>
 

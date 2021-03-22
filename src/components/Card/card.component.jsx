@@ -16,7 +16,7 @@ const Card = (props) => (
     </div>
     <div className="card_button">
       <button>
-        <Link to={`/hotel/${props._id}`}>Make Reservation</Link>
+        <Link to={`/hotel/${props._id}`}>Book Now</Link>
       </button>
     </div>
   </div>
