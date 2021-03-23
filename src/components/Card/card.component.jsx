@@ -6,7 +6,7 @@ import './card.styles.css';
 const Card = (props) => (
   <div className='card_container'>
     <div className="card_initial">
-      <h1>{props.name.split('')[0]}</h1>
+      <h1>{props.name.split('')[0]}{props.name.split(" ")[1]}</h1>
     </div>
     <div className="card_details">
       <p>Hotel: {props.name}</p>
