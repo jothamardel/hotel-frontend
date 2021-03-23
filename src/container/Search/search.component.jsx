@@ -51,7 +51,7 @@ class Search extends React.Component {
 
 
   render() {
-    console.log(this.props.hotels.available_hotels.message)
+    // console.log(this.props.hotels.available_hotels.message)
     return (
       <div style={{ textAlign: 'center' }}>
         <p>{this.props.hotels.available_hotels.message}</p>
